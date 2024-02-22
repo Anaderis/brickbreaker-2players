@@ -1,12 +1,15 @@
 #include <SDL2/SDL.h>
 #include <unistd.h>
 #include "function.h"
+#include <SDL2/SDL_mixer.h>
 
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
 #define FPS 60
 #define nombreColonne 5
 #define nombreLigne 5
+
+int Mix_OpenAudio(int frequency, Uint16 format, int channels, int chunksize);
 
 /*-----------Initialisation de toutes les variables---------------*/
 
@@ -427,25 +430,25 @@ for(int i=0;i<nombreColonne;i++) //nombre de colonnes = nombre de briques par li
 	    	
 	    if(tabVieBrROG[j][i]==0 && tabCartesXROG[j][i]==1 && tabCartesYROG[j][i]==1)
 	    	{
-	    	sprite(tabXROG[j][i],tabYROG[j][i],"Assets/potion.bmp");
+	    	sprite(tabXROG[j][i],tabYROG[j][i],"Assets/coffre.bmp");
 	    	}
-	    	else if(tabVieBrROG[j][i]==0 && tabCartesXROG[j][i]==2 && tabCartesYROG[j][i]==1)
+	    	else if(tabVieBrROG[j][i]==0 && tabCartesXROG[j][i]==3 && tabCartesYROG[j][i]==4)
 	    	{
 	    	sprite(tabXROG[j][i],tabYROG[j][i],"Assets/coffre.bmp");
 	    	}
-	    	else if(tabVieBrROG[j][i]==0 && tabCartesXROG[j][i]==3 && tabCartesYROG[j][i]==1)
+	    	else if(tabVieBrROG[j][i]==0 && tabCartesXROG[j][i]==1 && tabCartesYROG[j][i]==3)
 	    	{
 	    	sprite(tabXROG[j][i],tabYROG[j][i],"Assets/skull.bmp");
 	    	} 
-	    	else if(tabVieBrROG[j][i]==0 && tabCartesXROG[j][i]==2 && tabCartesYROG[j][i]==2)
+	    	else if(tabVieBrROG[j][i]==0 && tabCartesXROG[j][i]==3 && tabCartesYROG[j][i]==2)
 	    	{
 	    	sprite(tabXROG[j][i],tabYROG[j][i],"Assets/skull.bmp");
 	    	}
-	    	else if(tabVieBrROG[j][i]==0 && tabCartesXROG[j][i]==3 && tabCartesYROG[j][i]==2)
+	    	else if(tabVieBrROG[j][i]==0 && tabCartesXROG[j][i]==4 && tabCartesYROG[j][i]==2)
 	    	{
 	    	sprite(tabXROG[j][i],tabYROG[j][i],"Assets/coffre.bmp");
 	    	}
-	    	else if(tabVieBrROG[j][i]==0 && tabCartesXROG[j][i]==2 && tabCartesYROG[j][i]==3)
+	    	else if(tabVieBrROG[j][i]==0 && tabCartesXROG[j][i]==5 && tabCartesYROG[j][i]==5)
 	    	{
 	    	sprite(tabXROG[j][i],tabYROG[j][i],"Assets/skull.bmp");
 	    	}
