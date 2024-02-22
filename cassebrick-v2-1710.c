@@ -10,40 +10,16 @@
 
 /*-----------Initialisation de toutes les variables---------------*/
 
-/*---------Jeu BONUS--------------*/
-
-int lancementBonus;
-
-int xjoueuse;
-int yjoueuse;
-int compteurPas;
-int vitessejoueuse;
-
 // lancement du jeu 
 int start;
 int lancementJeu;
 
-// création du Danger
-
-int xDanger;
-int yDanger;
-int vitesseDanger;
+// Pilote Gnome 
 
 int xGnome;
 int yGnome;
 int vitessexGnome;
 int vitesseyGnome;
-
-// Elements de fond - jeu bonus
-
-int xFish;
-int yFish;
-int vitesseFish;
-int xTurtle;
-int yTurtle;
-int vitesseTurtle;
-
-
 /*----------Jeu Casse-briques-----------*/
 
 //position du carre dessiné dans drawGame()
@@ -133,126 +109,7 @@ int compteurOverPEP;
 int compteurWinROG;
 int compteurOverROG;
 
-/*---------------Fond d'écran du jeu Bonus--------------------------*/ 
-void drawWallpaperBonus()
-{	
-	if ((lancementBonus==2 || lancementBonus==3) && lancementJeu==0)
-	{
-	sprite(0,0,"Assets/Bonus/beach_bonus.bmp");
-	//sprite(0,320,"Assets/Bonus/palm-tree.bmp");
-	//sprite(0,WINDOW_HEIGHT-20,"Assets/Bonus/sand.bmp");
-	
-	}
-}
 
-/*---------Poissons et élements dynamiques fond du jeu Bonus-------*/
-
-void drawFish()
-{
-
-if (xFish+(r*r)>0 && lancementBonus==3)
-{
-	sprite(xFish,yFish,"Assets/Bonus/carp.bmp");
-	
-	xFish+=-vitesseFish;
-	
-}
-else
-{
-	xFish=WINDOW_WIDTH;
-	xFish+=-vitesseFish;
-	sprite(xFish,yFish,"Assets/Bonus/carp.bmp");
-	
-}
-
-if(xTurtle<WINDOW_WIDTH && lancementBonus==3)
-	{
-	sprite(xTurtle,yTurtle,"Assets/Bonus/turtle.bmp");
-	xTurtle=vitesseTurtle;
-	}
-else if(xTurtle>=WINDOW_WIDTH && lancementBonus==3)
-	{
-	xTurtle=0;
-	sprite(xTurtle,yTurtle,"Assets/Bonus/turtle.bmp");
-	xTurtle=vitesseTurtle;
-	}
-
-}
-
-/*-----------------lancement de ma gnome - jeu Bonus -------------*/
-void gnomeBonus()
-{
-
-	if(lancementBonus==3)
-	{
-		printf("coucou\n");
-	if (compteurPas==0)
-	{	
-	sprite(xjoueuse-r,yjoueuse-r,"Assets/Bonus/gnome1.bmp");
-	}
-	if (compteurPas==1)
-	{
-	sprite(xjoueuse-r,yjoueuse-r,"Assets/Bonus/gnome1.bmp");
-	}
-	if (compteurPas==2)
-	{
-	sprite(xjoueuse-r,yjoueuse-r,"Assets/Bonus/gnome2.bmp");
-	}
-	if (compteurPas==3)
-	{
-	sprite(xjoueuse-r,yjoueuse-r,"Assets/Bonus/gnome3.bmp");
-	}
-	if (compteurPas==4)
-	{
-	sprite(xjoueuse-r,yjoueuse-r,"Assets/Bonus/gnome4.bmp");
-	}
-	if (compteurPas==5)
-	{
-	sprite(xjoueuse-r,yjoueuse-r,"Assets/Bonus/gnome5.bmp");
-	}
-	if (compteurPas==6)
-	{
-	sprite(xjoueuse-r,yjoueuse-r,"Assets/Bonus/gnome6.bmp");
-	}
-	}
-}
-
-/*------------Collision de ma gnome - Jeu Bonus---------------------*/
-
-void RebondsBonus ()
-{
-    if ((xjoueuse>=WINDOW_WIDTH-r)||(xjoueuse<=r))
-    	{
-    	xjoueuse=0;
-		xjoueuse++; 
-    	}
-    	
-    /*if((yjoueuse>=WINDOW_HEIGHT-r)||(yjoueuse<=r))
-    	{
-    	vitessejoueuse=-vitessejoueuse; // L'inverse de l'autre, si il est égal à -1, il fera l'inverse et inversement. 
-    	}*/
-}
-/*------------Création du danger - jeu Bonus ------------------------*/
-
-void drawDanger()
-{
-
-if (xDanger+(r*2)>0 && lancementBonus==3)
-{
-	sprite(xDanger,yDanger,"Assets/Bonus/danger.bmp");
-	
-	xDanger+=-vitesseDanger;
-	
-}
-else
-{
-	xDanger=WINDOW_WIDTH;
-	xDanger+=-vitesseDanger;
-	sprite(xDanger,yDanger,"Assets/Bonus/turtle.bmp");
-	
-}
-
-}
 
 /*---------------- Ecran de démarrage Gnomes-------------------*/
 void startGame()
@@ -910,25 +767,6 @@ void gameWin ()
 
 void init_game(){
 
-    /*---------Jeu Bonus-----------------*/
-    
-   vitessejoueuse=10;
-   xjoueuse=80;
-   yjoueuse=WINDOW_HEIGHT-350;
-   r=20;
-
-   xDanger=WINDOW_WIDTH;
-   yDanger=WINDOW_HEIGHT-350;
-   vitesseDanger=5;
-
-   lancementBonus=3;
-   
-   xFish=WINDOW_WIDTH;
-   yFish=200;
-   vitesseFish=2;
-   xTurtle=0;
-   yTurtle=WINDOW_HEIGHT-150;
-   vitesseTurtle=1;
     
 
     /*---------lancementJeu du jeu---------*/
@@ -1114,17 +952,6 @@ void drawGame(){
 
 		gameOver(); 
 	
-
-	drawWallpaperBonus();
-	
-	drawFish();
-
-	gnomeBonus();
-
-	drawDanger();
-
-	RebondsBonus();
-	    	
 	actualize();
 	   
 	usleep(1000000 / FPS); // 60 images par seconde | 1000000 = 1 seconde 
@@ -1143,14 +970,9 @@ void KeyPressed(SDL_Keycode touche){
         case SDLK_x:
         
         
-        if(lancementBonus==2)
-        {
-        lancementBonus=3;
-        }
-        else
-        {
+        
         lancementJeu=1;
-        }
+        
         break;
         
         case SDLK_q:
@@ -1167,19 +989,6 @@ void KeyPressed(SDL_Keycode touche){
             vitessexPEP=2;
             xRondPEP+=vitessexPEP;
             
-            
-            // Gnome jeu bonus
-            if (lancementBonus==3)
-            {
-				xjoueuse+=vitessejoueuse;
-				compteurPas++;
-            if (compteurPas==6)
-			{
-				compteurPas=0;
-			}
-            }
-            
-	    
        
             break;
 
@@ -1239,10 +1048,7 @@ void KeyPressed(SDL_Keycode touche){
             break;
         
         case SDLK_RETURN:
-        if(compteurWinPEP==3 || compteurWinROG==3)
-        	{
-        	lancementBonus=2;
-           	}
+        
             break;
             
 
@@ -1287,7 +1093,7 @@ void gameLoop() {
          
         if(start==1)
         {
-        printf("%d\n", lancementBonus);
+        
         drawGame();
 
         }
